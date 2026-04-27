@@ -1,0 +1,76 @@
+{
+  "scan": {
+    "id": "eb97d227-629d-47a2-a118-7982e5ce053d",
+    "target": "https://pentest-ground.com:7001/console/login/LoginForm.jsp",
+    "status": "paused",
+    "started_at": "2026-04-24 20:56:16.644926",
+    "finished_at": "2026-04-24 21:17:52.463013",
+    "finding_count": 2,
+    "trust_summary": {
+      "verified": 0,
+      "strong": 0,
+      "moderate": 0,
+      "weak": 2
+    }
+  },
+  "findings": [
+    {
+      "id": "316b5960-760c-4eb6-b37d-d080bfb6b98d",
+      "title": "Insecure Cookie: ADMINCONSOLESESSION",
+      "severity": "medium",
+      "category": "auth_bypass",
+      "agent": "fuzzer",
+      "file_path": null,
+      "line_number": null,
+      "url": "https://pentest-ground.com:7001/console/login/LoginForm.jsp",
+      "parameter": "",
+      "payload": "",
+      "description": "Cookie 'ADMINCONSOLESESSION' has: missing Secure flag, missing HttpOnly flag, missing SameSite attribute.",
+      "code_snippet": null,
+      "poc": "",
+      "remediation": "Set Secure, HttpOnly, and SameSite=Strict on all cookies.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.8,
+      "trust": {
+        "score": 26,
+        "tier": "weak",
+        "signals": [
+          "moderate model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-24 21:01:50.406272"
+    },
+    {
+      "id": "a53d733a-451a-4a8f-8357-bd8c9c4febc5",
+      "title": "Missing HSTS header",
+      "severity": "low",
+      "category": "misconfiguration",
+      "agent": "fuzzer",
+      "file_path": null,
+      "line_number": null,
+      "url": "https://pentest-ground.com:7001/console/login/LoginForm.jsp",
+      "parameter": "",
+      "payload": "",
+      "description": "The response is missing the 'Strict-Transport-Security' security header.",
+      "code_snippet": null,
+      "poc": "",
+      "remediation": "Add the 'Strict-Transport-Security' HTTP response header.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.8,
+      "trust": {
+        "score": 26,
+        "tier": "weak",
+        "signals": [
+          "moderate model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-24 21:01:50.254573"
+    }
+  ]
+}

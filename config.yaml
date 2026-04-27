@@ -1,0 +1,139 @@
+# ─────────────────────────────────────────
+#  ZeroDay AI — Main Configuration
+# ─────────────────────────────────────────
+
+ollama:
+  host: "http://localhost:11434"
+  model: "zeroday-ai"                # Custom model from Modelfile (based on qwen2.5-coder:7b)
+  fallback_model: "codellama"        # Used if primary not available
+  timeout: 600
+  temperature: 0.15                  # Balanced: precise but avoids repetitive outputs
+  max_tokens: 8192
+  context_window: 32768
+
+scan:
+  max_file_size_mb: 10
+  max_files_per_scan: 500
+  ignore_patterns:
+    - "*.min.js"
+    - "node_modules/**"
+    - ".git/**"
+    - "__pycache__/**"
+    - "*.pyc"
+    - "venv/**"
+    - ".venv/**"
+    - "dist/**"
+    - "build/**"
+    - "*.lock"
+  supported_languages:
+    - python
+    - javascript
+    - typescript
+    - php
+    - java
+    - c
+    - cpp
+    - go
+    - ruby
+    - rust
+    - solidity
+    - bash
+
+static_analysis:
+  run_bandit: true
+  run_semgrep: true          # Requires: pip install semgrep
+  run_secrets_scan: true
+  run_dep_audit: true
+  chunk_size: 90             # Max lines per LLM chunk (smaller = better focus)
+
+fuzzer:
+  max_requests_per_endpoint: 200
+  request_timeout: 30
+  concurrency: 10
+  user_agent: "Mozilla/5.0 (ZeroDay-AI/1.0 Security Research)"
+  follow_redirects: true
+  verify_ssl: false           # Set true in production
+  crawl_depth: 3
+  rate_limit:
+    enabled: true
+    requests_per_second: 20
+    backoff_on_429: true
+  oob:
+    enabled: true
+    callback_host: ""         # Your public server or interact.sh
+    interactsh_url: "https://interact.sh"
+  interesting_params:
+    - id
+    - user
+    - username
+    - file
+    - path
+    - url
+    - redirect
+    - page
+    - query
+    - search
+    - cmd
+    - exec
+    - template
+    - lang
+    - format
+
+network:
+  port_scan_timeout: 2.0
+  banner_grab_timeout: 5.0
+  common_ports:
+    - 21    # FTP
+    - 22    # SSH
+    - 23    # Telnet
+    - 25    # SMTP
+    - 53    # DNS
+    - 80    # HTTP
+    - 110   # POP3
+    - 139   # NetBIOS
+    - 143   # IMAP
+    - 443   # HTTPS
+    - 445   # SMB
+    - 1433  # MSSQL
+    - 1521  # Oracle
+    - 2049  # NFS
+    - 3000  # Dev HTTP
+    - 3306  # MySQL
+    - 3389  # RDP
+    - 4444  # Metasploit default
+    - 5432  # PostgreSQL
+    - 5900  # VNC
+    - 6379  # Redis
+    - 8080  # Alt HTTP
+    - 8443  # Alt HTTPS
+    - 8888  # Jupyter
+    - 9200  # Elasticsearch
+    - 11211 # Memcached
+    - 27017 # MongoDB
+  service_detection: true
+  banner_grabbing: true
+
+reporting:
+  output_dir: "reports"
+  formats:
+    - json
+    - markdown
+  include_poc: true
+  severity_threshold: "info"  # info | low | medium | high | critical
+
+database:
+  path: "zeroday.db"
+
+knowledge:
+  cve_cache_path: "knowledge/cve_cache.json"
+  nvd_api_url: "https://services.nvd.nist.gov/rest/json/cves/2.0"
+  update_cve_on_start: true
+  cve_lookback_days: 365
+
+api_server:
+  host: "0.0.0.0"
+  port: 8000
+  reload: false
+  cors_origins:
+    - "http://localhost:3000"
+    - "http://127.0.0.1:3000"

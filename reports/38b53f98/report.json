@@ -1,0 +1,17 @@
+{
+  "scan": {
+    "id": "38b53f98-6771-488f-8f59-69e7b492d296",
+    "target": "127.0.0.1",
+    "status": "completed",
+    "started_at": "2026-04-24 03:18:17.318557",
+    "finished_at": "2026-04-24 03:18:17.378955",
+    "finding_count": 0,
+    "trust_summary": {
+      "verified": 0,
+      "strong": 0,
+      "moderate": 0,
+      "weak": 0
+    }
+  },
+  "findings": []
+}

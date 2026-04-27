@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+.env
+.venv/
+venv/
+
+reports/
+zeroday.db
+training_data.jsonl
+knowledge/cve_cache.json
+knowledge/chroma_db_learnings/

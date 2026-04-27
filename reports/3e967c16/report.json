@@ -1,0 +1,17 @@
+{
+  "scan": {
+    "id": "3e967c16-c967-482b-ac92-e39c86f79b7f",
+    "target": "http://example.com",
+    "status": "completed",
+    "started_at": "2026-04-24 20:54:48.529064",
+    "finished_at": "2026-04-24 20:54:55.726029",
+    "finding_count": 0,
+    "trust_summary": {
+      "verified": 0,
+      "strong": 0,
+      "moderate": 0,
+      "weak": 0
+    }
+  },
+  "findings": []
+}

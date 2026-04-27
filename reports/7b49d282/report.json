@@ -1,0 +1,279 @@
+{
+  "scan": {
+    "id": "7b49d282-5f1a-4354-8357-c33835d19d6a",
+    "target": "https://pentest-ground.com:5013",
+    "status": "completed",
+    "started_at": "2026-04-21 19:08:57.940356",
+    "finished_at": "2026-04-21 19:14:35.027109",
+    "finding_count": 9,
+    "trust_summary": {
+      "verified": 0,
+      "strong": 0,
+      "moderate": 0,
+      "weak": 9
+    }
+  },
+  "findings": [
+    {
+      "id": "8161922b-7b76-4d71-8f59-991f1a41da10",
+      "title": "Dangerous Service Exposed: REDIS on port 6379",
+      "severity": "critical",
+      "category": "exposed_service",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:6379",
+      "parameter": null,
+      "payload": null,
+      "description": "Redis exposed \u2014 often unauthenticated.\nBanner: +PONG",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": "Firewall port 6379 or ensure redis requires authentication.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.9,
+      "trust": {
+        "score": 30,
+        "tier": "weak",
+        "signals": [
+          "high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.721905"
+    },
+    {
+      "id": "b38b2f23-ebf7-432a-8343-6473d8459c3e",
+      "title": "Insecure Cookie: env",
+      "severity": "medium",
+      "category": "auth_bypass",
+      "agent": "fuzzer",
+      "file_path": null,
+      "line_number": null,
+      "url": "https://pentest-ground.com:5013",
+      "parameter": "",
+      "payload": "",
+      "description": "Cookie 'env' has: missing Secure flag, missing HttpOnly flag, missing SameSite attribute.",
+      "code_snippet": null,
+      "poc": "",
+      "remediation": "Set Secure, HttpOnly, and SameSite=Strict on all cookies.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.8,
+      "trust": {
+        "score": 26,
+        "tier": "weak",
+        "signals": [
+          "moderate model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:09:55.492114"
+    },
+    {
+      "id": "24eb689a-c4f8-41e6-9abc-71c474d1eeb9",
+      "title": "Missing HSTS header",
+      "severity": "low",
+      "category": "misconfiguration",
+      "agent": "fuzzer",
+      "file_path": null,
+      "line_number": null,
+      "url": "https://pentest-ground.com:5013",
+      "parameter": "",
+      "payload": "",
+      "description": "The response is missing the 'Strict-Transport-Security' security header.",
+      "code_snippet": null,
+      "poc": "",
+      "remediation": "Add the 'Strict-Transport-Security' HTTP response header.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.8,
+      "trust": {
+        "score": 26,
+        "tier": "weak",
+        "signals": [
+          "moderate model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:09:55.434323"
+    },
+    {
+      "id": "15df84a0-6d24-4fb5-a269-3e7b5c8ccc7f",
+      "title": "Server Information Disclosure via Server",
+      "severity": "info",
+      "category": "sensitive_exposure",
+      "agent": "fuzzer",
+      "file_path": null,
+      "line_number": null,
+      "url": "https://pentest-ground.com:5013",
+      "parameter": "",
+      "payload": "",
+      "description": "Header 'Server: nginx/1.29.8' reveals server technology.",
+      "code_snippet": null,
+      "poc": "",
+      "remediation": "Remove or obscure the 'Server' header.",
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.8,
+      "trust": {
+        "score": 26,
+        "tier": "weak",
+        "signals": [
+          "moderate model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:09:55.478435"
+    },
+    {
+      "id": "16faee63-63e3-4cb9-a7b3-8ad331fb73e2",
+      "title": "Open Port: 80/http",
+      "severity": "info",
+      "category": "open_port",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:80",
+      "parameter": null,
+      "payload": null,
+      "description": "Port 80 (http) is open on pentest-ground.com.\nBanner: HTTP/1.1 301 Moved Permanently\r\nServer: nginx/1.29.8\r\nDate: Tue, 21 Apr 2026 19:13:17 GMT\r\nContent-Type: text/html\r\nContent-Length: 169\r\nConnection: close\r\nLocation: https://pentest-ground.com\r\n\r\n<html>\r\n<head><title>301 Moved Permanently</title></head>\r\n<body>\r\n<center><h1>301 Moved Permanently</h1></center>\r\n<hr><center>nginx/1.29.8</center>\r\n</body>\r\n</html>",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": null,
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.99,
+      "trust": {
+        "score": 34,
+        "tier": "weak",
+        "signals": [
+          "very high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.067092"
+    },
+    {
+      "id": "45dc9fff-582b-4829-b852-29ba478f8ff5",
+      "title": "Version Disclosure: nginx 1.29.8 on port 80",
+      "severity": "info",
+      "category": "sensitive_exposure",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:80",
+      "parameter": null,
+      "payload": null,
+      "description": "nginx version 1.29.8 identified from banner.\nCheck CVE databases for known vulnerabilities in this version.",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": null,
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.95,
+      "trust": {
+        "score": 34,
+        "tier": "weak",
+        "signals": [
+          "very high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.094151"
+    },
+    {
+      "id": "07f12586-0ac5-408f-8a64-c25904c0e5b4",
+      "title": "Open Port: 443/https",
+      "severity": "info",
+      "category": "open_port",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:443",
+      "parameter": null,
+      "payload": null,
+      "description": "Port 443 (https) is open on pentest-ground.com.\nBanner: HTTP/1.1 400 Bad Request\r\nServer: nginx/1.29.8\r\nDate: Tue, 21 Apr 2026 19:13:17 GMT\r\nContent-Type: text/html\r\nContent-Length: 255\r\nConnection: close\r\n\r\n<html>\r\n<head><title>400 The plain HTTP request was sent to HTTPS port</title></head>\r\n<body>\r\n<center><h1>400 Bad Request</h1></center>\r\n<center>The plain HTTP request was sent to HTTPS port</center>\r\n<hr><center>nginx/1.29.8</center>\r\n</body>\r\n</html>",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": null,
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.99,
+      "trust": {
+        "score": 34,
+        "tier": "weak",
+        "signals": [
+          "very high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.379983"
+    },
+    {
+      "id": "b473a38c-c854-4df4-8a54-382e7206d81e",
+      "title": "Version Disclosure: nginx 1.29.8 on port 443",
+      "severity": "info",
+      "category": "sensitive_exposure",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:443",
+      "parameter": null,
+      "payload": null,
+      "description": "nginx version 1.29.8 identified from banner.\nCheck CVE databases for known vulnerabilities in this version.",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": null,
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.95,
+      "trust": {
+        "score": 34,
+        "tier": "weak",
+        "signals": [
+          "very high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.395440"
+    },
+    {
+      "id": "718e0490-5b96-4be3-96b8-77c3bf5ad589",
+      "title": "Open Port: 6379/redis",
+      "severity": "info",
+      "category": "open_port",
+      "agent": "network",
+      "file_path": null,
+      "line_number": null,
+      "url": "pentest-ground.com:6379",
+      "parameter": null,
+      "payload": null,
+      "description": "Port 6379 (redis) is open on pentest-ground.com.\nBanner: +PONG",
+      "code_snippet": null,
+      "poc": null,
+      "remediation": null,
+      "cve_ids": null,
+      "cvss_score": null,
+      "confidence": 0.99,
+      "trust": {
+        "score": 34,
+        "tier": "weak",
+        "signals": [
+          "very high model confidence",
+          "request target captured",
+          "observed during runtime probing"
+        ]
+      },
+      "created_at": "2026-04-21 19:13:17.703280"
+    }
+  ]
+}

