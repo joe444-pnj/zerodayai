@@ -38,7 +38,7 @@ The ZeroDay AI project is a comprehensive vulnerability assessment tool designed
 - urllib.parse 3.4.3+
 
 ### Installation
-1. Clone the repository: `git clone https://github.com/your-repo/ZeroDay-AI.git`
+1. Clone the repository: `git clone https://github.com/joe444-pnj/zerodayai`
 2. Navigate to the project directory: `cd ZeroDay-AI`
 3. Install dependencies: `pip install -r requirements.txt`
 4. Configure environment variables: `cp .env.example .env`
