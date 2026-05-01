@@ -87,6 +87,3 @@ Contributions are welcome! Please submit a pull request with your changes and a 
 
 ## 📝 License
 This project is licensed under the MIT License.
-## 💖 Thanks Message
-This project was made possible by the contributions of many individuals. Thank you to everyone who has helped make this project a success! 
-This is written by readme.ai [readme.ai](https://readme-generator-phi.vercel.app/)
