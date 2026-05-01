@@ -1,6 +1,13 @@
 # ZERODAY AI
+<p align="center">
+  <img src="./assets/logo.png" alt="ZeroDay AI Logo" width="200"/>
+</p>
 
-![ZERODAY AI Logo](./assets/logo.png)
+<p align="center">
+  <strong>Autonomous Vulnerability Research Powered by Reasoning</strong>
+</p>
+
+---
 
 **Autonomous Vulnerability Research Powered by Reasoning**
 
